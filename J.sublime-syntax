@@ -1,0 +1,72 @@
+%YAML 1.2
+---
+# Copyright 2016 XLP Capital   Lamba Prime  Syntax Highlighting
+# www.xlpcapital.com
+# www.lambdaprime.com
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: J
+file_extensions: [ijs]
+scope: source.example-j
+contexts:
+  main:
+  	#Assignment
+    - match: (=.|=:)
+      scope: keyword.control.c
+    
+    #Strings
+    - match: "'"
+      push: string
+
+    # Parenthesis structures
+    - match: (\(|\))
+      scope: invalid.deprecated
+
+    # Line comments
+    - match: 'NB.'
+      scope: comment.line
+      push: line_comment
+      
+    # Numbers
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numericstorage.type
+
+    # Adverbs
+    - match: (/|\/\.|\/:|\\\.|\\:|\\|\/|/|\{|{:|{\.|\{|\}:|\}\.|\}|\`:|\`)
+      scope: punctuation.terminator
+
+    # Single Character functions
+    - match: (a\.|a:|A\.|b\.|C\.|d\.|D\.|D:|e\.|E\.|f\.|H\.|i\.|i:|I\.|j\.|L\.|L:|M\.|o\.|p\.\.|p\.|p:|q:|r\.|s:|S:|t\.|t:|T\.|u:|x:)
+      scope: entity.name.class
+
+    # Control characters
+    - match: (<|<\.|<:|>|>\.|>:|\+|\+\.|\+:|\*.|\*:|\*|\-\.|\-:|\-|%|%\.|%:|\^\.|\^\:|\^|\$\:|\$\.|\~\.|\~:|\~|\||\|\.|\|:)
+      scope: entity.name.type
+
+    # Rank
+    - match: (\"|\"\.|\":)
+      scope: constant.character.escape
+
+    # Data manipulation
+    - match: (\.\.|\.:|\.|:\.|::|:|\,:|\,\.|\,|;:|;\.|\;|#;|#:|#|\!:|\!\.|\!|\[|\])
+      scope: entity.name.tag
+
+    # Mappers
+    - match: (\@:|\@.|\@|@:|@.|@|\?|\?\.|\&:|\&\.|\&)
+      scope: storage.type
+
+
+
+
+  string:
+    - meta_scope: string.quoted.double
+    - match: \\.
+      scope: constant.character.escape
+    - match: "'"
+      pop: true
+
+  line_comment:
+    - meta_scope: comment.line
+    - match: $
+      pop: true
+
+
